@@ -252,20 +252,20 @@ with col1:
     st.markdown("---")
     leaderboard_chart(scores, selected_person, subset_players)
 
+    st.markdown("## 🔍 View any player's picks")
+
+    all_players = sorted(long_df_subset["Name"].unique())
+
+    selected_view_player = st.selectbox(
+        "Select a player to view their teams",
+        all_players
+    )
+
+    if selected_view_player:
+        player_picks(long_df_all, selected_view_player)
+
 with col4:
     results_feed(results, long_df_subset, selected_person)
-
-st.markdown("## 🔍 View any player's picks")
-
-all_players = sorted(long_df_subset["Name"].unique())
-
-selected_view_player = st.selectbox(
-    "Select a player to view their teams",
-    all_players
-)
-
-if selected_view_player:
-    player_picks(long_df_all, selected_view_player)
 
 
 # ----------------------------
