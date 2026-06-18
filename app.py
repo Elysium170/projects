@@ -144,7 +144,7 @@ st.markdown("<div style='height: 2.5em;'></div>", unsafe_allow_html=True)
 long_df, df = load_data()
 
 # ✅ get players from rows 79–84 (python is 0-based)
-subset_players = df.iloc[79:85]["Name"].dropna().unique()
+subset_players = df.iloc[78:85]["Name"].dropna().unique()
 
 results = load_results()
 scores = calculate_scores(long_df, results)
