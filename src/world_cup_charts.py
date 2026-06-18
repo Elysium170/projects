@@ -844,7 +844,7 @@ def leaderboard_chart(scores, selected_person, subset_players):
         elif gap <= 10:
             gap_text = f"Only <b>{gap}</b> points separate the top spot 👀"
         else:
-            gap_text = f"A <b>{gap}</b>-points in it."
+            gap_text = f"<b>{gap}</b> points in it. The big teams are still to rack up their points for wins in the knockouts, apart from maybe England."
 
     else:
         second_text = ""
