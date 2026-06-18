@@ -232,7 +232,7 @@ if selected_person is None:
         color:#296f2c;
         box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     ">
-        👈 Select a player by pushing the arrows in the top left to get started<br>
+        👈 Select a player by pushing the top left of screen to get started<br>
     </div>
     """, unsafe_allow_html=True)
 

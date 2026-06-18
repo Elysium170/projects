@@ -304,7 +304,7 @@ def player_picks(long_df, name):
     nz_picked = "New Zealand" in teams
 
     if nz_picked:
-        nz_text = "Most importantly has <b>faith / blind hope in the New Zealanders</b> which is great to see. Surely it can only get better than their 4-0 loss to Haiti in the pre-World Cup friendly."
+        nz_text = "Most importantly has <b>faith / blind hope in the New Zealanders</b> with Wood and Elijah looking like prime Kane and Son."
     else:
         nz_text = "Opted against New Zealand, craaaaazy."
 
