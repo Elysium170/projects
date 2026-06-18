@@ -246,8 +246,6 @@ st.markdown("---")
 
 col1, col2, col3, col4 = st.columns([1, 0.05, 0.05, 1])
 
-st.write(long_df)
-
 with col1:
     player_picks(long_df, selected_person)
     st.markdown("---")

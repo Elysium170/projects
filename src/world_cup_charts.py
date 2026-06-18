@@ -195,7 +195,6 @@ def team_popularity_chart(long_df):
     scroll_box = f"""
     <div style="
         max-height: 350px;
-        overflow-y: scroll;
         padding-right: 10px;
         position: relative;
     ">
