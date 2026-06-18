@@ -292,7 +292,7 @@ def player_picks(long_df, name):
     if nz_picked:
         nz_text = "Most importantly has <b>faith / blind hope in the New Zealanders</b> which is great to see. Surely it can only get better than their 4-0 loss to Haiti in the pre-World Cup friendly."
     else:
-        nz_text = "Opted against New Zealand, maybe discouraged by their 4-0 loss to Haiti in a pre-World Cup friendly."
+        nz_text = "Opted against New Zealand, craaaaazy."
 
     # chips
     chips = " ".join([
@@ -335,7 +335,6 @@ def picks_per_person_chart(long_df):
 
     html = f"""
     <h2>Picks per player</h2>
-    <p>Shout out to the underdog sympathisers Ryan Wilkinson and Paddy Plunket who managed to pick all teams valued at $2 or less.
     <p>Average picks across the Commission: <b>{avg}</b></p>
     {plot_to_html(fig)}
     """
