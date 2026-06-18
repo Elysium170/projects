@@ -141,13 +141,14 @@ st.markdown("<div style='height: 2.5em;'></div>", unsafe_allow_html=True)
 # ----------------------------
 # Load data
 # ----------------------------
-long_df, df = load_data()
+long_df_all, df = load_data()
 
-# ✅ get players from rows 79–84 (python is 0-based)
+# subset version
 subset_players = df.iloc[79:84]["Name"].dropna().unique()
+long_df_subset = long_df_all[long_df_all["Name"].isin(subset_players)]
 
 results = load_results()
-scores = calculate_scores(long_df, results)
+scores = calculate_scores(long_df_subset, results)
 
 
 # ----------------------------
@@ -196,7 +197,7 @@ if st.sidebar.button("Clear selection"):
 
 # ✅ mini summary
 total_players = len(subset_players)
-total_picks = len(long_df)
+total_picks = len(long_df_subset)
 
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 
@@ -231,7 +232,7 @@ if selected_person is None:
         color:#296f2c;
         box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     ">
-        👈 Select a player to get started<br>
+        👈 Select a player in the sidebar at the top left to get started<br>
     </div>
     """, unsafe_allow_html=True)
 
@@ -247,12 +248,12 @@ st.markdown("---")
 col1, col2, col3, col4 = st.columns([1, 0.05, 0.05, 1])
 
 with col1:
-    player_picks(long_df, selected_person)
+    player_picks(long_df_subset, selected_person)
     st.markdown("---")
     leaderboard_chart(scores, selected_person, subset_players)
 
 with col4:
-    results_feed(results, long_df, selected_person)
+    results_feed(results, long_df_subset, selected_person)
 
 
 # ----------------------------
@@ -265,17 +266,14 @@ st.markdown("---")
 col3, col4 = st.columns([1, 1])
 
 with col3:
-    similarity_chart(long_df, selected_person, subset_players)
+    similarity_chart(long_df_subset, selected_person, subset_players)
 
 with col4:
-    nz_chart(long_df)
+    nz_chart(long_df_subset)
 
 st.markdown("---")
 
 col5, col6 = st.columns([1, 1])
 
 with col5:
-    team_popularity_chart(long_df)
-
-with col6:
-    picks_per_person_chart(long_df)
+    team_popularity_chart(long_df_all, subset_players)

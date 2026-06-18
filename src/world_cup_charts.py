@@ -41,6 +41,11 @@ def load_data():
 
     df = pd.read_excel(file_path)
 
+    # ✅ identify missing names
+    mask = df["Name"].isna() | (df["Name"].str.strip() == "")
+
+    # ✅ only modify blanks
+    df.loc[mask, "Name"] = "Unnamed_" + df.index[mask].astype(str)
 
     df.columns = (
         df.columns
@@ -87,10 +92,15 @@ def load_data():
 # ----------------------------
 # Charts
 # ----------------------------
-def team_popularity_chart(long_df):
+def team_popularity_chart(long_df_all, subset_players):
 
-    # --- Clean team names (helps avoid mismatches) ---
-    long_df["Team"] = long_df["Team"].str.strip()
+    df = long_df_all.copy()
+
+    filter_subset = st.checkbox("Show only Come On Phoenix players", value=False)
+
+    
+    if filter_subset:
+        df = df[df["Name"].isin(subset_players)]
 
     # --- All possible teams ---
     all_teams = {
@@ -106,7 +116,7 @@ def team_popularity_chart(long_df):
     }
 
     # --- Player → unique teams ---
-    players = long_df.groupby("Name")["Team"].apply(set)
+    players = df.groupby("Name")["Team"].apply(set)
 
     team_counts = (
         players.explode()
@@ -166,6 +176,8 @@ def team_popularity_chart(long_df):
     plt.xticks([])
     plt.tight_layout()
 
+    small_group = filter_subset  # only triggers for Phoenix players
+
     def format_list(items):
         if len(items) == 1:
             return items[0]
@@ -174,27 +186,34 @@ def team_popularity_chart(long_df):
         else:
             return ", ".join(items[:-1]) + f", and {items[-1]}"
 
+    parts = []
+
     # --- Commentary ---
-    top_text = format_list(top_teams)
+    if not small_group:
+        top_text = format_list(top_teams)
 
-    second_text = ""
-    if second_teams:
-        second_text = f", followed by <b>{format_list(second_teams)}</b>"
+        second_text = ""
+        if second_teams:
+            second_text = f", followed by <b>{format_list(second_teams)}</b>"
 
-    text = f"""
-    <p><b>{top_text}</b> had the most backers{second_text}.
-    """
+        # ✅ add top text
+        parts.append(
+            f"<p>After including players from the work league comp I made as well, <b>{top_text}</b> had the most backers{second_text}.</p>"
+        )
 
-    no_picks_text = ""
-    if no_picks:
-        no_picks_text = f"<p>There were sadly no picks for {' and '.join(no_picks)}. Can they outperform expectations?</p>"
+        # ✅ add no picks text if needed
+        if no_picks:
+            parts.append(
+                f"<p>There were sadly no picks for {' and '.join(no_picks)}. Can they outperform expectations?</p>"
+            )
 
-    # --- Scroll wrapper ---
+    # --- Chart ---
     chart_html = plot_to_html(fig)
 
     scroll_box = f"""
     <div style="
         max-height: 350px;
+        overflow-y: scroll;
         padding-right: 10px;
         position: relative;
     ">
@@ -208,14 +227,16 @@ def team_popularity_chart(long_df):
     </div>
     """
 
+    parts.append(scroll_box)
+
+    # --- Title ---
+    title = "Most backed teams (Come On Phoenix)" if filter_subset else "Most backed teams (All players)"
+
     # --- Final HTML ---
     html = f"""
-    <h2>Most backed teams</h2>
-    {text}
-    {no_picks_text}
-    {scroll_box}
+    <h2>{title}</h2>
+    {"".join(parts)}
     """
-
     st.markdown(white_box(html), unsafe_allow_html=True)
 
 
@@ -277,7 +298,7 @@ def player_picks(long_df, name):
     elif count < avg:
         extra = f"<b>Favours the bigger teams</b>, going for a quality over quantity approach ({count} teams picked vs average of {avg})."
     else:
-        extra = f"Picked {count} teams, on par with the ComCom average."
+        extra = f"Picked {count} teams, on par with the average."
 
     # add small insights
     nz_picked = "New Zealand" in teams
@@ -328,7 +349,7 @@ def picks_per_person_chart(long_df):
 
     html = f"""
     <h2>Picks per player</h2>
-    <p>Average picks across the Commission: <b>{avg}</b></p>
+    <p>Average picks across Come on Phoenix: <b>{avg}</b></p>
     {plot_to_html(fig)}
     """
     st.markdown(white_box(html), unsafe_allow_html=True)
@@ -777,7 +798,7 @@ def leaderboard_chart(scores, selected_person, subset_players):
 
         person_text = (
             f"<b>{selected_person}</b> is on <b>{person_score} points "
-            f"in {place_text}</b> place out of 78 players."
+            f"in {place_text}</b> place."
         )
     else:
         person_text = ""
@@ -823,7 +844,7 @@ def leaderboard_chart(scores, selected_person, subset_players):
         elif gap <= 10:
             gap_text = f"Only <b>{gap}</b> points separate the top spot 👀"
         else:
-            gap_text = f"A <b>{gap}</b>-point gap has opened up."
+            gap_text = f"A <b>{gap}</b>-points in it."
 
     else:
         second_text = ""
@@ -841,8 +862,7 @@ def leaderboard_chart(scores, selected_person, subset_players):
 
     scroll_box = f"""
     <div style="
-        max-height: 400px;
-        overflow-y: scroll;
+        max-height: 420px;
         padding-right: 10px;
         position: relative;
     ">
