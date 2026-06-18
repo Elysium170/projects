@@ -82,12 +82,6 @@ def load_data():
         })
     )
 
-    print(df[team_columns].head(5).to_string())
-
-    # ✅ remove max picker
-    counts = long_df.groupby("Name").size()
-    long_df = long_df[long_df["Name"].isin(counts[counts < counts.max()].index)]
-
     return long_df, df
 
 # ----------------------------
