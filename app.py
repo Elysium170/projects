@@ -244,24 +244,12 @@ if selected_person is None:
 st.markdown("## 👤 Player Picks and Results")
 st.markdown("---")
 
-col1, col2, divider, col3, col4 = st.columns([1, 0.05, 0.02, 0.05, 1])
+col1, col2, col3, col4 = st.columns([1, 0.05, 0.05, 1])
 
 with col1:
     player_picks(long_df, selected_person)
     st.markdown("---")
     leaderboard_chart(scores, selected_person, subset_players)
-
-with divider:
-    st.markdown(
-        """
-        <div style="
-            border-left: 1px solid #ccc;
-            height: 1070px;
-            margin: auto;
-        "></div>
-        """,
-        unsafe_allow_html=True
-    )
 
 with col4:
     results_feed(results, long_df, selected_person)
@@ -274,44 +262,20 @@ st.markdown("<div style='height: 0.2em;'></div>", unsafe_allow_html=True)
 st.markdown("## 🏆 Competition Insights")
 st.markdown("---")
 
-col3, divider, col4 = st.columns([1, 0.02, 1])
+col3, col4 = st.columns([1, 1])
 
 with col3:
     similarity_chart(long_df, selected_person, subset_players)
-
-with divider:
-    st.markdown(
-        """
-        <div style="
-            border-left: 1px solid #ccc;
-            height: 600px;
-            margin: auto;
-        "></div>
-        """,
-        unsafe_allow_html=True
-    )
 
 with col4:
     nz_chart(long_df)
 
 st.markdown("---")
 
-col5, divider, col6 = st.columns([1, 0.02, 1])
+col5, col6 = st.columns([1, 1])
 
 with col5:
     team_popularity_chart(long_df)
-
-with divider:
-    st.markdown(
-        """
-        <div style="
-            border-left: 1px solid #ccc;
-            height: 600px;
-            margin: auto;
-        "></div>
-        """,
-        unsafe_allow_html=True
-    )
 
 with col6:
     picks_per_person_chart(long_df)
