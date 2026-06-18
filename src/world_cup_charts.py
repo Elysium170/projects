@@ -1,4 +1,7 @@
 import pandas as pd
+import matplotlib
+matplotlib.use("Agg")  # ✅ add this line
+import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import seaborn as sns
 from io import BytesIO
