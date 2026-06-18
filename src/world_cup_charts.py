@@ -1,7 +1,4 @@
 import pandas as pd
-import matplotlib
-matplotlib.use("Agg")  # ✅ add this line
-import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import seaborn as sns
 from io import BytesIO
@@ -91,7 +88,7 @@ def load_data():
     counts = long_df.groupby("Name").size()
     long_df = long_df[long_df["Name"].isin(counts[counts < counts.max()].index)]
 
-    return long_df
+    return long_df, df
 
 # ----------------------------
 # Charts
@@ -703,9 +700,11 @@ def results_feed(results, long_df, selected_person):
                 st.info("No matches to display")
 
 
-def leaderboard_chart(scores, selected_person):
+def leaderboard_chart(scores, selected_person, subset_players):
     if scores is None:
         return
+    
+    scores = scores[scores["Name"].isin(subset_players)]
 
     # Aggregate scores (ALL players now, not just top 12)
     data = (

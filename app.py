@@ -141,7 +141,11 @@ st.markdown("<div style='height: 2.5em;'></div>", unsafe_allow_html=True)
 # ----------------------------
 # Load data
 # ----------------------------
-long_df = load_data()
+long_df, df = load_data()
+
+# ✅ get players from rows 79–84 (python is 0-based)
+subset_players = df.iloc[78:84]["Name"].dropna().unique()
+
 results = load_results()
 scores = calculate_scores(long_df, results)
 
@@ -245,7 +249,7 @@ col1, col2, divider, col3, col4 = st.columns([1, 0.05, 0.02, 0.05, 1])
 with col1:
     player_picks(long_df, selected_person)
     st.markdown("---")
-    leaderboard_chart(scores, selected_person)
+    leaderboard_chart(scores, selected_person, subset_players)
 
 with divider:
     st.markdown(
