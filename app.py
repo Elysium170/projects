@@ -144,7 +144,7 @@ st.markdown("<div style='height: 2.5em;'></div>", unsafe_allow_html=True)
 long_df, df = load_data()
 
 # ✅ get players from rows 79–84 (python is 0-based)
-subset_players = df.iloc[78:85]["Name"].dropna().unique()
+subset_players = df.iloc[79:84]["Name"].dropna().unique()
 
 results = load_results()
 scores = calculate_scores(long_df, results)
@@ -245,6 +245,8 @@ st.markdown("## 👤 Player Picks and Results")
 st.markdown("---")
 
 col1, col2, col3, col4 = st.columns([1, 0.05, 0.05, 1])
+
+st.write(long_df)
 
 with col1:
     player_picks(long_df, selected_person)
