@@ -1,0 +1,13 @@
+name: sf_env
+channels:
+- snowflake
+dependencies:
+- streamlit
+- plotly
+- matplotlib
+- numpy
+- pandas
+- pyodbc
+- seaborn
+- openpyxl
+- streamlit-mermaid

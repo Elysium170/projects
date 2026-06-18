@@ -1,0 +1,59 @@
+[default]
+default_connection_name = "snowflake_output"
+
+
+[connections.snowflake_output]
+account = "comcomdataplatform.australia-east.azure"
+user = "sam.wright@comcom.govt.nz"
+database = "DATAANALYTICS_DB_DEV"
+schema = "INTEL_OUTPUT"
+warehouse = "DAP_WH_NONPROD_INTEL"
+role = "GRP_AZ_DA_NONPROD_INTEL_DEVELOPER"
+authenticator = "externalbrowser"
+client_session_keep_alive = true
+
+[connections.snowflake_output_TEST]
+account = "comcomdataplatform.australia-east.azure"
+user = "sam.wright@comcom.govt.nz"
+database = "DATAANALYTICS_DB_TST"
+schema = "INTEL_OUTPUT"
+warehouse = "DAP_WH_NONPROD_INTEL"
+role = "GRP_AZ_DA_NONPROD_INTEL_DEVELOPER"
+authenticator = "externalbrowser"
+
+[connections.snowflake_output_PROD]
+account = "comcomdataplatform.australia-east.azure"
+user = "sam.wright@comcom.govt.nz"
+database = "DATAANALYTICS_DB_PRD"
+schema = "INTEL_OUTPUT"
+warehouse = "DAP_WH_PROD_INTEL_VISUALISATIONS"
+role = "GRP_AZ_DA_PROD_INTEL_DEVELOPER"
+authenticator = "externalbrowser"
+
+[connections.snowflake_pub]
+account = "comcomdataplatform.australia-east.azure"
+user = "sam.wright@comcom.govt.nz"
+database = "DATAANALYTICS_DB_DEV"
+schema = "INTEL_PUBLIC"
+warehouse = "DAP_WH_NONPROD_INTEL"
+role = "GRP_AZ_DA_NONPROD_INTEL_DEVELOPER"
+authenticator = "externalbrowser"
+
+[connections.snowflake_pub_TEST]
+account = "comcomdataplatform.australia-east.azure"
+user = "sam.wright@comcom.govt.nz"
+database = "DATAANALYTICS_DB_TST"
+schema = "INTEL_PUBLIC"
+warehouse = "DAP_WH_NONPROD_INTEL"
+role = "GRP_AZ_DA_NONPROD_INTEL_DEVELOPER"
+authenticator = "externalbrowser"
+
+[connections.snowflake_pub_PROD]
+account = "comcomdataplatform.australia-east.azure"
+user = "sam.wright@comcom.govt.nz"
+database = "DATAANALYTICS_DB_PRD"
+schema = "INTEL_PUBLIC"
+warehouse = "DAP_WH_PROD_INTEL_VISUALISATIONS"
+role = "GRP_AZ_DA_PROD_INTEL_DEVELOPER"
+authenticator = "externalbrowser"
+client_session_keep_alive = true

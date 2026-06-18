@@ -1,0 +1,12 @@
+definition_version: 1
+streamlit:
+  name: world_cup_charts
+  stage: stage
+  query_warehouse: DAP_WH_PROD_INTEL_VISUALISATIONS
+  main_file: app.py
+  env_file: environment.yml
+  #pages_dir: pages/
+  additional_source_files:
+    - src/world_cup_charts.py
+    - src/Football_World_Cup_2026_Pick_Em_1-79.xlsx
+    - src/results.xlsx
