@@ -342,7 +342,10 @@ def picks_per_person_chart(long_df):
     st.markdown(white_box(html), unsafe_allow_html=True)
 
 
-def similarity_chart(long_df, selected):
+def similarity_chart(long_df, selected, subset_players):
+
+    # ✅ filter to subset players
+    long_df = long_df[long_df["Name"].isin(subset_players)]
 
     base = set(long_df[long_df["Name"] == selected]["Team"])
 

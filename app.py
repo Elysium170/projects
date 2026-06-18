@@ -131,7 +131,7 @@ section[data-testid="stSidebar"] button {
 
 
 st.markdown(
-    "<h1 style='text-align:center; font-size:58px;'>⚽ Fifa World Cup Pick'em Dashboard</h1>",
+    "<h1 style='text-align:center; font-size:58px;'>⚽ Fifa World Cup Pick'em Dashboard - Come On Phoenix edition</h1>",
     unsafe_allow_html=True
 )
 
@@ -144,7 +144,7 @@ st.markdown("<div style='height: 2.5em;'></div>", unsafe_allow_html=True)
 long_df, df = load_data()
 
 # ✅ get players from rows 79–84 (python is 0-based)
-subset_players = df.iloc[78:84]["Name"].dropna().unique()
+subset_players = df.iloc[79:84]["Name"].dropna().unique()
 
 results = load_results()
 scores = calculate_scores(long_df, results)
@@ -169,7 +169,7 @@ Player Selection
 </div>
 """, unsafe_allow_html=True)
 
-options = sorted(long_df["Name"].unique())
+options = sorted(subset_players)
 
 # ✅ initialise state
 if "player_select" not in st.session_state:
@@ -195,7 +195,7 @@ if st.sidebar.button("Clear selection"):
     st.rerun()
 
 # ✅ mini summary
-total_players = long_df["Name"].nunique()
+total_players = len(subset_players)
 total_picks = len(long_df)
 
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
@@ -209,7 +209,7 @@ st.sidebar.markdown(f"""
     border:6px solid #e0e0e0;
     font-size:17px;
 ">
-<b>{total_players}</b> players competing
+<b>{total_players}</b> players competing for $50
 </div>
 """, unsafe_allow_html=True)
 
@@ -277,7 +277,7 @@ st.markdown("---")
 col3, divider, col4 = st.columns([1, 0.02, 1])
 
 with col3:
-    similarity_chart(long_df, selected_person)
+    similarity_chart(long_df, selected_person, subset_players)
 
 with divider:
     st.markdown(
