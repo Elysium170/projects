@@ -131,7 +131,7 @@ section[data-testid="stSidebar"] button {
 
 
 st.markdown(
-    "<h1 style='text-align:center; font-size:58px;'>⚽ Fifa World Cup Pick'em Dashboard - Come On Phoenix edition</h1>",
+    "<h1 style='text-align:center; font-size:58px;'>⚽ Fifa World Cup Pick'em Dashboard</h1>",
     unsafe_allow_html=True
 )
 

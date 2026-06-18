@@ -857,7 +857,7 @@ def leaderboard_chart(scores, selected_person, subset_players):
     """
 
     html = f"""
-    <h2>Leaderboard</h2>
+    <h2>Come on Phoenix Leaderboard</h2>
     {extra_text}
     {scroll_box}
     """
