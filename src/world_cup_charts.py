@@ -198,7 +198,7 @@ def team_popularity_chart(long_df_all, subset_players):
 
         # ✅ add top text
         parts.append(
-            f"<p>After including players from a work league comp well, <b>{top_text}</b> had the most backers{second_text}.</p>"
+            f"<p>After including players from a work league comp as well, <b>{top_text}</b> had the most backers{second_text}.</p>"
         )
 
         # ✅ add no picks text if needed
