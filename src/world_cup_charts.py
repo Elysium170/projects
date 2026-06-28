@@ -218,7 +218,7 @@ def team_popularity_chart(long_df_all, subset_players):
         position: relative;
     ">
         {chart_html}
-
+        
         <div style="
             position: sticky;
             bottom: 0;
@@ -738,10 +738,8 @@ def leaderboard_chart(scores, selected_person, subset_players):
     second_score = data.iloc[1] if len(data) > 1 else None
 
     # Dynamic height (so bars don’t squash)
-    height_per_player = 0.3
-    max_height = 12  # ✅ cap it
-
-    fig_height = min(max_height, max(4, len(data) * height_per_player))
+    height_per_player = 0.35
+    fig_height = max(4, len(data) * height_per_player)
 
     import matplotlib.cm as cm
     import matplotlib.colors as mcolors
